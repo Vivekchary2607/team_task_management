@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./style.css";
-import { useEffect } from "react";
+
 
 export default function Login({ setToken }) {
     
