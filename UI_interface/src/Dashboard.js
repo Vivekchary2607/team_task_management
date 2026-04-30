@@ -11,7 +11,7 @@ export default function Dashboard({ token,logout }) {
 
   // Fetch logged-in user
   const fetchUser = async () => {
-    const res = await axios.get("http://localhost:5000/api/auth/me", {
+    const res = await axios.get("https://team-task-management-7gye.onrender.com/api/auth/me", {
       headers: { Authorization: token }
     });
     setUserInfo(res.data);
@@ -19,7 +19,7 @@ export default function Dashboard({ token,logout }) {
 
   // Fetch users (for assignment)
   const fetchUsers = async () => {
-    const res = await axios.get("http://localhost:5000/api/auth/users", {
+    const res = await axios.get("https://team-task-management-7gye.onrender.com/api/auth/users", {
       headers: { Authorization: token }
     });
     setUsers(res.data);
@@ -27,7 +27,7 @@ export default function Dashboard({ token,logout }) {
 
   // Fetch tasks
   const fetchTasks = useCallback(async () => {
-    const res = await axios.get("http://localhost:5000/api/tasks", {
+    const res = await axios.get("hhttps://team-task-management-7gye.onrender.com/api/tasks", {
       headers: { Authorization: token }
     });
     setTasks(res.data);
@@ -56,7 +56,7 @@ export default function Dashboard({ token,logout }) {
   // Update status
   const updateStatus = async (id, status) => {
     await axios.put(
-      `http://localhost:5000/api/tasks/${id}`,
+      `https://team-task-management-7gye.onrender.com/api/tasks/${id}`,
       { status },
       { headers: { Authorization: token } }
     );
