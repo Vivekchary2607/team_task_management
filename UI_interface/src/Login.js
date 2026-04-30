@@ -20,11 +20,11 @@ export default function Login({ setToken }) {
   const submit = async () => {
     try {
       if (isRegister) {
-        await axios.post("http://localhost:5000/api/auth/signup", data);
+        await axios.post("https://team-task-management-7gye.onrender.com/api/auth/signup", data);
         alert("Registered successfully! Now login.");
         setIsRegister(false);
       } else {
-        const res = await axios.post("http://localhost:5000/api/auth/login", data);
+        const res = await axios.post("https://team-task-management-7gye.onrender.com/api/auth/login", data);
         localStorage.setItem("token", res.data.token);
         setToken(res.data.token);
       }
