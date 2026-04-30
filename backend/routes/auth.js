@@ -2,11 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const token = jwt.sign(
-  { id: user._id, role: user.role }, // ✅ role included
-  process.env.JWT_SECRET
-);
-const { auth } = require("../middleware/auth"); // ✅ ADD HERE
+const { auth } = require("../middleware/auth");
 
 // ================= REGISTER =================
 router.post("/signup", async (req, res) => {
@@ -43,6 +39,7 @@ router.post("/login", async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(400).json({ msg: "Invalid password" });
 
+    // ✅ CORRECT PLACE
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET
@@ -55,19 +52,16 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// ================= NEW ROUTES =================
-
-// Get logged-in user
+// ================= GET LOGGED USER =================
 router.get("/me", auth, async (req, res) => {
   const user = await User.findById(req.user.id);
   res.json(user);
 });
 
-// Get all users
+// ================= GET ALL USERS =================
 router.get("/users", auth, async (req, res) => {
   const users = await User.find();
   res.json(users);
 });
 
-// ================= EXPORT =================
 module.exports = router;
